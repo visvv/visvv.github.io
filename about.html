@@ -27,64 +27,37 @@
 <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <link rel="icon" type="image/png" href="images/favicon.png">
-<style type="text/css">
-.display-false{
-display:none;	
-}
-</style>
+
 </head>
-<body ng-app="Wrtr">
+<body>
 
 	<!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	<div class="container" style="margin-top: 50px"
-		ng-controller="PageController">
+	<div class="container" ng-app="Wrtr">
 		<div class="row">
-			<div class="three columns  display-{{displayList}}" style="margin-top: 0px;">
-				 <img alt="" src="/pics/wZBkqWny.jpeg" style=" width:100%;height: auto;border-radius: 130px;"/>
-				 
-				<h3>Vishnu Vasudevan</h3>
-				<p>I'm a software engineer. Mostly scribbling in Java & Java script. Lives in Bangalore Love hill stations. Fan of apple products</p>
-				<h2></h2>
-				<h5>
-					<a href="https://github.com/visvv">Github</a> | <a href="https://twitter.com/visvv">Twitter</a>
-				</h5>
-			</div>
-			<div class="nine columns display-{{displayList}}" ng-repeat="writeUp in writeupList">
-				<div class="row">
-					<div class="one-half column">
-						<h4>{{writeUp.title}}</h4>
-						<p>
-						{{writeUp.note}}
-							 <a ng-click="pageController.showWriteUp(writeUp.title)" href="">Read more....</a>.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="nine columns display-{{!displayList}}">
-				<div class="row">
-					<div class="">
-					<a ng-click="pageController.showList()" href="">
-								Back to home</a>.
-						<h3>{{writeUp.title}}</h3>
-						<p ng-bind-html="writeUp.content">
-						</p>
-						<a ng-click="pageController.showList()" href="">
-								Back to home</a>.
-					</div>
-				</div>
+			<div class="one-half column" style="margin-top: 25%" ng-controller="PageController">
+				<h4>Vishnu Vasudevan</h4>
+				<p>
+					This index.html page is a placeholder with the CSS, font and
+					favicon. It's just waiting for you to add some content! If you need
+					some help hit up the <a href="http://www.getskeleton.com">Skeleton
+						documentation</a>.
+				</p>
+				<button ng-click="pageController.print()">Button element</button>
 			</div>
 		</div>
-
 	</div>
 
 	<!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	<script type="text/javascript"
+  <script type="text/javascript"
 		src="/js/app/components/page/PageService.js">  </script>
 	<script type="text/javascript"
 		src="/js/app/components/page/PageController.js">  </script>
 	<script type="text/javascript" src="/js/angular.min.js"></script>
 	<script type="text/javascript" src="/js/app/app.js"> </script>
-</body>
+
+	<script type="text/javascript">
+  console.log("haiii");
+  </script>
 </html>
