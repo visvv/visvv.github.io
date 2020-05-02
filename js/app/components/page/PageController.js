@@ -29,7 +29,7 @@ PageController.prototype.showList = function() {
 	console.log("print the data !!!!!");
 	this.scope.displayList = true; 
 	var self = this;
-	window.history.pushState("","writeUpId","/index.html");
+	// window.history.pushState("","writeUpId","/index.html");
 	this.service.getBlogList(function(data) {
 		console.log(data);
 		if (data) {
@@ -44,9 +44,10 @@ PageController.prototype.showWriteUp = function(writeUpId){
 		console.log(data);
 		if(data){
 			self.scope.writeUp.title = data.writeUp.title;
+			self.scope.writeUp.date = data.writeUp.date;
 			self.scope.writeUp.content = self.sce.getTrustedHtml(data.writeUp.content);
 		}
-		window.history.pushState("","writeUpId","/index.html?a=" + stringZip(writeUpId));
+		// window.history.pushState("","writeUpId","/blog.html?a=" + stringZip(writeUpId));
 	});
 	return false;
 }

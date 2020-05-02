@@ -1,7 +1,9 @@
 {
-   "writeUpList":[
+   "writeUpList": [
       {
+         "id" : "sorting_in_java_8",
          "title":"Sorting in Java 8",
+         "date" : "Jan 24,2018",
          "note":"Sorting is about ordering a list of object and we do this quite often. In fact, this is one of the fundamental problems we all should aware about as a developer.\nWhen it comes to Java, Collection framework provides a well-abstracted way to sort objects. They don’t have to implement a sorting algorithm whenever they want to sort some objects"
       }
    ]

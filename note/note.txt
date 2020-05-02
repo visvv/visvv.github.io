@@ -1,0 +1,3 @@
+npm install -g local-web-server
+ws // to star the local server
+

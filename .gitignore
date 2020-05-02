@@ -13,3 +13,6 @@ app/
 *.iml
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+
+node_modules/
+package-lock.json
