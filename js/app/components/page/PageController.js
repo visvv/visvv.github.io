@@ -41,15 +41,20 @@ PageController.prototype.showWriteUp = function(writeUpId){
 	this.scope.displayList = false;
 	var self = this;
 	this.service.getWriteUp(stringZip(writeUpId), function(data){
-		console.log(data);
 		if(data){
-			self.scope.writeUp.title = data.writeUp.title;
-			self.scope.writeUp.date = data.writeUp.date;
-			self.scope.writeUp.content = self.sce.getTrustedHtml(data.writeUp.content);
+			self.scope.writeUp.content = self.sce.getTrustedHtml(data);
 		}
-		// window.history.pushState("","writeUpId","/blog.html?a=" + stringZip(writeUpId));
+		highlighter();
 	});
 	return false;
+}
+
+function highlighter() {
+    setTimeout(function() {
+        document.querySelectorAll('pre code').forEach((block) => {
+    		hljs.highlightBlock(block);
+  	    });
+    }, 10);
 }
 
 function getParameterByName(name) {

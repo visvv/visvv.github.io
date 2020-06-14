@@ -1,0 +1,195 @@
+<h2>Sorting in java 8</h2>
+<p>Sorting is about ordering a list of objects and we do this quite often. In fact, this is one of the fundamental
+    problems we all should be aware about as a developer.
+    When it comes to Java, Collection framework provides a well-abstracted way to sort objects. We don’t have to
+    implement a sorting algorithm whenever we want to sort some objects. Instead, what is required is an implementation
+    of how two objects need to be compared.</p>
+    <p>
+        As is mentioned in the title, this article is intended to describe sort operations using java 8 at the high level.
+    But before we start sort in java 8 let’s have a look at how to perform sort using earlier versions of Java.
+</p>
+<pre>
+    <code class="java">
+        Collections.sort(users, new Comparator&lt;user&gt;() {
+             public int compare(User u1, User u2) {
+                return u1.getFirstName().compareTo(u2.getFirstName);
+             }
+        });
+	</code>
+</pre>
+<h4>Before Java 8</h4>
+<p>
+    Suppose you have some User objects. And to sort the users based on the first name you will use the below code
+    snippet.
+</p>
+
+
+<p>
+<b>Collections.sort()</b> accepts users- list of User objects and a Comparator. It uses an Anonymous inner class to for Comparator implementation.
+</p>
+<p>
+As I mentioned earlier you don’t have to think much about the sort algorithm, time-space complexity, consistency etc. Instead, you have to write an implementation for the Comparator interface based on the criteria you want to sort the User list. Cool !!!
+</p>
+
+<p>
+<b>Collections.sort()</b> internally uses Arrays.sort() which uses a stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when the input array is partially sorted, while offering the performance of a traditional mergesort when the input array is randomly ordered. If the input array is nearly sorted, the implementation requires approximately n comparisons. Temporary storage requirements vary from a small constant for nearly sorted input arrays to n/2 object references for randomly ordered input arrays.
+</p>
+<p>
+This is a common example of <b>template design
+    pattern</b> in Java collection framework. It just abstracts the actual algorithm and allows you to define the a step of the algorithm which is ‘How to compare two objects’.
+
+In fact, you don’t have to use a Comparator here, If User implements Comparable interface and the compareTo() method implemented based on firstName.
+<b>Collections.sort(users);</b>   will solve you problem.
+What if you want to sort the user list based on their last name, userId or DOB ?.
+Yes, you can use the same approach by using Comparator implementation. But the anonymous inner classes has a problem, they are not reusable.
+</p>
+<p>
+What If you want to sort the user or any subclasses of user list somewhere else in you code. You have to duplicate the anonymous inner class implementation again. We don’t worry about that because we know how to copy paste a piece of code, we all are the masters in that.
+</p><p>
+But NO. We are violating <b>DRY(Don’t Repeat
+    Yourself)</b>. DRY tells to avoid the code repetition and move that code into a reusable unit. How to do that? </p>
+<p>
+By creating separate sub-classes of Comparable for every criteria. That needs more effort and it is less maintainable.
+So I would prefer to go with an approach using nested static classes which avoid the duplication.<br>
+    And we can use this as:</p>
+<pre><code class="java">Collections.sort(users, new UserSortCriteria.OrderByLastName());</code></pre>
+
+<h4>Let’s start Java 8</h4>
+
+<p>
+Till now I was trying to describe the conventional steps and practices we need to follow while doing the sort in Java.
+Let’s start Java 8, I believe you are familiar with some of the new features in Java 8 such as Lambdas, streams, default methods etc. Because in the coming part there I will be describing how to use these new features for sort operation rather than focusing on this features.
+Let’s re implement the above code using some of the new features in Java8.
+</p>
+
+<h4>1. Get rid of Collections.sort()</h4>
+<p>
+Well, in Java 8 List interface came up with a default sort() method which internally uses Collection.sort(). Here is how you sort object using sort() method.
+</p>
+<pre>
+    <code class="java">
+        users.sort((u1, u2) -&gt; {
+            return u1.getFirstName.compareTo(u2.getFirstName());
+        });
+    </code>
+</pre>
+<h4>2. Using Lambda</h4>
+<p>
+Let’s use the lambda expression here to replace anonymous inner class approach used in the previous class.
+</p>
+<pre>
+    <code class="java">
+        users.sort((User u1,User u2) -&gt; {
+            return u1.getFirstName.compareTo(u2.getFirstName());
+        });
+    </code>
+</pre>
+<p>
+or by making it shorter as
+</p>
+<pre>
+    <code class="java">
+        users.sort((u1, u2) -&gt; {
+            return u1.getFirstName.compareTo(u2.getFirstName());
+        });
+    </code>
+</pre>
+<p>
+We could use lambda for comparator because the it is a functional interface.
+In simple words, we can say functional interfaces are single method interfaces. But more precisely, Functional interfaces has only one abstract method and it can have any number of default method implementations.
+<br>
+The first change you notice in Comparator interface source code is the presence of
+<b>@FunctionalInterface</b> annotation. And a couple of default methods are also been added to this interface. I will describe that later.
+Let’s come to the previous scenarios where you have to sort users based on different criteria. Rather that going for nested subclasses let’s try a new approach.
+Java 8 allows you to define static methods inside interface.
+</p>
+<pre>
+    <code class="java">
+ interface UserSortCriteria {
+  public static Comparator&lt;user&gt; sortBasedOnFirstName() {
+    return (u1, u2) -&gt; {
+      return u1.getFirstName().compareTo(f2.getFirstName());
+    };
+  }
+
+  public static Comparator&lt;user&gt; sortBasedOnLastName() {
+    return (u1, u2) -&amp;gt; {
+      return u1.getLastName().compareTo(f2.getLastName());
+    };
+  }
+}
+ </code>
+</pre>
+<p>
+In the above code, each of the methods uses lambda to return Comparator.
+And we can use this as:<br>
+</p>
+<pre>
+    <code class="java">
+        Collections.sort(users, UserSortCriteria.sortBasedOnFirstName());
+    </code>
+</pre>
+<p>See the amount of verbosity reduced by the Lambda expressions here.</p>
+<h4>3. Using Method Reference</h4>
+<p>
+Is there any problem with the current approach using lambda?
+No It works perfectly fine and it reduces the verbosity compared to the old anonymous inner class approach. Let’s a close look at the lambda we used here.
+</p>
+<pre>
+    <code class="java">
+        (u1, u2) -&gt; {return u1.getFirstName().compareTo(u2.getFirstName());}
+    </code>
+</pre>
+<p>
+    As you can see here, getFirstName()is being called twice, and we can consider this as code duplication at the conceptual level(Really !!!). In fact, we don't have to be that much conscious about the code duplications. But Java 8 can make it even better.
+<br>
+Let’s use Comparator.comparing() method which accepts a method reference that return the sort key. Here is how you use Comparator.comparing().
+</p>
+<pre>
+    <code class="java">
+        Collections.sort(users, Comparator.comparing(User::getFirstName));
+    </code>
+</pre>
+<p>Exciting !!! Isn’t it ? </p>
+
+<h4>4. Using Stream</h4>
+<p>
+Stream API is an another feature introduced in Java 8. See how we can use the stream for sorting a list. <br>
+</p>
+<pre>
+    <code class="java">
+        List&lt;user&gt; sortedUsers = users.stream()
+                          .sorted(SortCriterias.sortBasedOnFirstName())
+                          .collect(Collectors.toList());
+    </code>
+</pre>
+<p>
+Here sorted() method is using for the sort operation, which accepts a Comparator  as parameter. We can use method reference or a direct lambda expression here.
+</p>
+<pre>
+    <code class="java">
+        // Using lambda expression
+        List&lt;user&gt; sortedUserList = users.stream().sorted((u1,u2)-&amp;gt; {
+            return u1.getFirstName().compareTo(u2.getFirstName());})
+            .collect(Collectors.toList());
+
+        // Using Method Reference
+        List&lt;user&gt; sortedUserList = users.stream()
+                                .sorted(Comparator.comparing(User::getFirstName))
+                                .collect(Collectors.toList());
+    </code>
+</pre>
+<p>
+Finally, we are using collect() method to transform the stream into a list.
+</p>
+<h4>Conclusion</h4>
+<p>
+Time to use Java 8 features rather than sticking around the old conventions in Java. That makes your code more simple and concise.
+</p>
+
+<script type="text/javascript">
+  	document.querySelectorAll('pre code').forEach((block) => {
+  	        console.log("######");
+    		hljs.highlightBlock(block);
+  	});
+</script>

@@ -14,55 +14,35 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-<!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <link rel="stylesheet" href="/css/normalize.css"/>
 <link rel="stylesheet" href="/css/skeleton.css"/>
 	<link rel="stylesheet" href="/css/custom.css"/>
 
-<!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <link rel="icon" type="image/png" href="images/favicon.png">
 <style type="text/css">
 .display-false{
 display:none;	
 }
 </style>
+
+
 </head>
 <body ng-app="Wrtr">
 
-	<!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<nav class="navbar">
-		<div class="container">
-			<ul class="navbar-list u-pull-left">
-				<li class="navbar-item">
-					<a class="navbar-link" href="index.html">Back-end Scribbles</a>
-				</li>
-			</ul>
+		<div class="container" class="blog_title">
+			<h1>Backend-Scribbles</h1>
 		</div>
 	</nav>
-	<div class="container" style="margin-top: 50px"
+
+	<div class="container page_content"
 		ng-controller="PageController">
 		<div class="row">
-			<div class="three columns  display-{{displayList}}" style="margin-top: 0px;">
-				 <img alt="" src="/pics/wZBkqWny.jpg" style=" width:100%;height: auto;border-radius: 130px;"/>
-				<h3>Vishnu V V</h3>
-				<p>Java scribbler </p>
-				<h2></h2>
-				<div>
-					<h5>
-						<a href="https://github.com/visvv">Github</a> | <a href="https://twitter.com/visvv">Twitter</a>
-					</h5>
-				</div>
-			</div>
-			<div class="nine columns display-{{displayList}}" ng-repeat="writeUp in writeupList">
+			<div class="ten columns display-{{displayList}}" ng-repeat="writeUp in writeupList">
 				<div class="row">
 					<div class="three column">
 						<h4><a href="blog.html?a={{writeUp.id}}">
@@ -77,16 +57,15 @@ display:none;
 				</div>
 			</div>
 		</div>
-
 	</div>
 
-	<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- End Document -->
 	<script type="text/javascript"
 		src="/js/app/components/page/PageService.js">  </script>
 	<script type="text/javascript"
 		src="/js/app/components/page/PageController.js">  </script>
 	<script type="text/javascript" src="/js/angular.min.js"></script>
 	<script type="text/javascript" src="/js/app/app.js"> </script>
+
 </body>
 </html>

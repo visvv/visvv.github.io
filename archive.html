@@ -40,22 +40,8 @@
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <nav class="navbar">
-	<div class="container">
-		<!--            <h3>Vishnu Vasudevan</h3>-->
-		<!--			<div style="float: right">-->
-		<!--				<h4>-->
-		<!--					<a href="https://github.com/visvv">Github</a> | <a href="https://twitter.com/visvv">Twitter</a>-->
-		<!--				</h4>-->
-		<!--			</div>-->
-		<ul class="navbar-list u-pull-left">
-			<li class="navbar-item">
-				<a class="navbar-link" href="#intro">Vishnu V V</a>
-			</li>
-			<li class="navbar-item">
-				<a class="navbar-link" href="#" data-popover="#codeNavPopover">Blog</a>
-			</li>
-			<li class="navbar-item"><a class="navbar-link" href="#examples">About</a></li>
-		</ul>
+	<div class="container" class="blog_title">
+		<h1>Backend-Scribbles</h1>
 	</div>
 </nav>
 <div class="container" style="margin-top: 50px">
@@ -63,9 +49,40 @@
 		<div class="eleven columns">
 			<div class="row">
 				<div class="">
-					<h2><strong>title</strong></h2>
+					<h2><strong>Spring Boot + My Batis + Postgres Basic setup</strong></h2>
 					<div class="main_content" id="main_content">
 						<!-- start-->
+
+						I this article we are discussing about very minimal spring boot CRUD application integrated with
+						postgres database
+						using an orm framework called mybatis ( like hibernate).<br/>
+
+						Connecting our your application with a database is one of the fundamental aspects of everything
+						you build.
+						Especially for web applications. And it is pretty easy to build one with database connection
+						with spring boot.
+						<br/>
+						Lets look at how to setup mybatis with spring.
+						<br/>
+						<h3>Step 1. Maven dependencies.</h3>
+						I would suggest you to go to spring application builder website and create a sample project
+						there.
+						Rather than adding the spring dependencies manually. <br/>
+
+						Apart form those dependencies you might need to couple of additional dependecies including
+						mybatis-spring,
+						mybatis and postgres driver dependency.
+						<br/>
+						pom.xml <br/>
+						<pre>
+						<code>
+&#x3C;dependency&#x3E;
+  &#x3C;groupId&#x3E;org.springframework.boot&#x3C;/groupId&#x3E;
+  &#x3C;artifactId&#x3E;spring-boot-starter-data-jpa&#x3C;/artifactId&#x3E;
+&#x3C;/dependency&#x3E;
+						</code>
+						</pre>
+
 
 					</div> <!--End-->
 				</div>

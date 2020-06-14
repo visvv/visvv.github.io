@@ -1,6 +1,6 @@
 p {
   font-family: 'Lato', sans-serif;
-  font-size:22px;
+  font-size:20px;
   font-stretch:100%;
   font-style:normal;
   font-variant-caps:normal;
@@ -248,4 +248,16 @@ p {
   .popover-link:hover,
   .popover-item:first-child .popover-link:hover:after {
     border-bottom-color: #33C3F0; }
+}
+
+.blog_title > h1{
+    border: 1px solid black;
+    /* text-align: center; */
+    padding-top: 5px;
+    font-family: 'Comic Sans MS';
+}
+
+.page_content {
+  margin-top : 40px;
+  margin-bottom : 40px;
 }
