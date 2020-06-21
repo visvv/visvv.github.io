@@ -42,9 +42,9 @@ display:none;
 	<div class="container page_content"
 		ng-controller="PageController">
 		<div class="row">
-			<div class="ten columns display-{{displayList}}" ng-repeat="writeUp in writeupList">
-				<div class="row">
-					<div class="three column">
+			<div class="ten columns display-{{displayList}}" >
+				<div class="row" ng-repeat="writeUp in writeupList">
+					<div class="">
 						<h4><a href="blog.html?a={{writeUp.id}}">
 							{{writeUp.title}}
 						</a></h4>

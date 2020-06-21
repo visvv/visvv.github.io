@@ -1,0 +1,72 @@
+<h2>Running postgresql in docker for dev environments</h2>
+
+<img src="pics/postgres_in_docker/cover.jpg">
+Photo by Andy Li on Unsplash
+<p></p>
+<p>
+    Setting up postgres database for your day-to-day dev activities is an easy task;
+    you just need to download the installer and install it. It can be a little harder when you need more than one
+    version on your local machine or when there is a new postgres release available.
+</p>
+<p>
+    In this blog I am going to describe a much simpler approach for setting up postgres database in your local machine using
+    docker.
+</p>
+<p>
+    Disclaimer: This might not be the right place if you are looking  to setup your
+    postgres instance on your production environment.
+</p>
+
+<h4>Prerequisite: Docker</h4>
+<p>
+    Installing docker on your machine is no longer a difficult task, especially, on latest windows 10.
+    You can refer this <a href="https://runnable.com/docker/install-docker-on-windows-10">link</a> for Windows 10 and
+    <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04">link</a> for ubuntu.
+</p>
+
+<h4>Start docker command using a single command execution</h4>
+
+<pre>
+    <code>
+    docker run --name postgres-dev -p 5432:5432 -e POSTGRES_PASSWORD=secret -d postgres:latest
+    </code>
+</pre>
+<p>Executing the above command will do two things if you don’t have postgres:version image on your docker.</p>
+<p> 1. It will download the docker image. Downloading image will happen during the first execution of this command.
+    This step will be skipped if the image is already available in your docker instance.
+</p>
+<img src="pics/postgres_in_docker/postgres_in_docker_download_image.PNG"/>
+<p>2. Create a docker container with name</p>
+<img src="pics/postgres_in_docker/postgres_in_docker_start.PNG"/>
+
+</p>
+<h4>Postgres Credentials</h4>
+<p>
+    As shown in the command postgres super user <b>password</b> is set using environmental variable
+    <i>POSTGRES_PASSWORD</i>.
+    This cannot be undefined or empty in the docker run command.
+</p><p>
+    <b>Username</b> can be specified by providing environment variable <i>POSTGRES_USER</i>, but if you are not
+    specifying this
+    variable, default username <i>'postgres'</i> will be used.
+</p><p>
+    <b>Port</b> is mapped using the -p option. In this case port 5432 of postgres container is mapped with your host
+    machine’s
+    same port. In case this port is already in use, you can point to a different port as
+    shown below.
+</p>
+<pre>
+    <code>
+    docker run --name postgres-dev -p your-available-port:5432 -e POSTGRES_PASSWORD=secret -d postgres:latest
+    </code>
+</pre>
+<p>
+    The optional environment variable <i>POSTGRES_DB</i> can be used to define a different name for the database.
+    If it is not specified, the value of <i>POSTGRES_USER</i> will be used as the database name.
+    In this case, the database name will be <i>postgres</i>.
+</p>
+<h4>Conclusion</h4>
+<p>
+    For development purposes, running postgres inside your docker machine is much more simpler.
+    It is as simple as a single command line execution. This comes especially handy when you need to upgrade or downgrade your postgres setup.
+</p>

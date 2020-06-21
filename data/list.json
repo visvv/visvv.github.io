@@ -1,6 +1,12 @@
 {
    "writeUpList": [
       {
+         "id" : "postgres_in_docker",
+         "title":"Running postgres in docker for dev environments. ",
+         "date" : "June 14,2020",
+         "note":"Setting up postgres database for your day today dev activities is an easy task, you just need to download the installer and install it.In this blog I am going to describe a much simpler approach for postgres  database setup in your local machine using docker"
+      },
+      {
          "id" : "sorting_in_java_8",
          "title":"Sorting in Java 8",
          "date" : "Jan 24,2018",

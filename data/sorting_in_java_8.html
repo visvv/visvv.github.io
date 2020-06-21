@@ -1,4 +1,6 @@
 <h2>Sorting in java 8</h2>
+<img src="pics/sorting_in_java_8/cover.jpg">
+Photo by Eric Prouzet on Unsplash
 <p>Sorting is about ordering a list of objects and we do this quite often. In fact, this is one of the fundamental
     problems we all should be aware about as a developer.
     When it comes to Java, Collection framework provides a well-abstracted way to sort objects. We don’t have to
@@ -10,11 +12,11 @@
 </p>
 <pre>
     <code class="java">
-        Collections.sort(users, new Comparator&lt;user&gt;() {
-             public int compare(User u1, User u2) {
-                return u1.getFirstName().compareTo(u2.getFirstName);
-             }
-        });
+ Collections.sort(users, new Comparator&lt;user&gt;() {
+       public int compare(User u1, User u2) {
+             return u1.getFirstName().compareTo(u2.getFirstName);
+       }
+ });
 	</code>
 </pre>
 <h4>Before Java 8</h4>
@@ -68,9 +70,9 @@ Well, in Java 8 List interface came up with a default sort() method which intern
 </p>
 <pre>
     <code class="java">
-        users.sort((u1, u2) -&gt; {
-            return u1.getFirstName.compareTo(u2.getFirstName());
-        });
+  users.sort((u1, u2) -&gt; {
+        return u1.getFirstName.compareTo(u2.getFirstName());
+  });
     </code>
 </pre>
 <h4>2. Using Lambda</h4>
@@ -79,9 +81,9 @@ Let’s use the lambda expression here to replace anonymous inner class approach
 </p>
 <pre>
     <code class="java">
-        users.sort((User u1,User u2) -&gt; {
-            return u1.getFirstName.compareTo(u2.getFirstName());
-        });
+ users.sort((User u1,User u2) -&gt; {
+       return u1.getFirstName.compareTo(u2.getFirstName());
+ });
     </code>
 </pre>
 <p>
@@ -89,9 +91,9 @@ or by making it shorter as
 </p>
 <pre>
     <code class="java">
-        users.sort((u1, u2) -&gt; {
-            return u1.getFirstName.compareTo(u2.getFirstName());
-        });
+  users.sort((u1, u2) -&gt; {
+      return u1.getFirstName.compareTo(u2.getFirstName());
+  });
     </code>
 </pre>
 <p>
@@ -105,7 +107,7 @@ Java 8 allows you to define static methods inside interface.
 </p>
 <pre>
     <code class="java">
- interface UserSortCriteria {
+interface UserSortCriteria {
   public static Comparator&lt;user&gt; sortBasedOnFirstName() {
     return (u1, u2) -&gt; {
       return u1.getFirstName().compareTo(f2.getFirstName());
@@ -126,7 +128,7 @@ And we can use this as:<br>
 </p>
 <pre>
     <code class="java">
-        Collections.sort(users, UserSortCriteria.sortBasedOnFirstName());
+ Collections.sort(users, UserSortCriteria.sortBasedOnFirstName());
     </code>
 </pre>
 <p>See the amount of verbosity reduced by the Lambda expressions here.</p>
@@ -137,7 +139,7 @@ No It works perfectly fine and it reduces the verbosity compared to the old anon
 </p>
 <pre>
     <code class="java">
-        (u1, u2) -&gt; {return u1.getFirstName().compareTo(u2.getFirstName());}
+(u1, u2) -&gt; {return u1.getFirstName().compareTo(u2.getFirstName());}
     </code>
 </pre>
 <p>
@@ -147,7 +149,7 @@ Let’s use Comparator.comparing() method which accepts a method reference that 
 </p>
 <pre>
     <code class="java">
-        Collections.sort(users, Comparator.comparing(User::getFirstName));
+Collections.sort(users, Comparator.comparing(User::getFirstName));
     </code>
 </pre>
 <p>Exciting !!! Isn’t it ? </p>
@@ -158,9 +160,9 @@ Stream API is an another feature introduced in Java 8. See how we can use the st
 </p>
 <pre>
     <code class="java">
-        List&lt;user&gt; sortedUsers = users.stream()
-                          .sorted(SortCriterias.sortBasedOnFirstName())
-                          .collect(Collectors.toList());
+  List&lt;user&gt; sortedUsers = users.stream()
+                     .sorted(SortCriterias.sortBasedOnFirstName())
+                     .collect(Collectors.toList());
     </code>
 </pre>
 <p>
@@ -168,15 +170,15 @@ Here sorted() method is using for the sort operation, which accepts a Comparator
 </p>
 <pre>
     <code class="java">
-        // Using lambda expression
-        List&lt;user&gt; sortedUserList = users.stream().sorted((u1,u2)-&amp;gt; {
-            return u1.getFirstName().compareTo(u2.getFirstName());})
-            .collect(Collectors.toList());
+ // Using lambda expression
+ List&lt;user&gt; sortedUserList = users.stream().sorted((u1,u2)-&amp;gt; {
+                                return u1.getFirstName().compareTo(u2.getFirstName());
+                             }).collect(Collectors.toList());
 
-        // Using Method Reference
-        List&lt;user&gt; sortedUserList = users.stream()
-                                .sorted(Comparator.comparing(User::getFirstName))
-                                .collect(Collectors.toList());
+ // Using Method Reference
+ List&lt;user&gt; sortedUserList = users.stream()
+                             .sorted(Comparator.comparing(User::getFirstName))
+                             .collect(Collectors.toList());
     </code>
 </pre>
 <p>
